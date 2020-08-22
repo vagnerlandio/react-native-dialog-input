@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import TextInputMask from 'react-native-text-input-mask';
 
 class DialogInput extends PureComponent{
   constructor(props){
@@ -70,7 +71,7 @@ class DialogInput extends PureComponent{
               <View style={styles.modal_body} >
                 <Text style={styles.title_modal}>{title}</Text>
                 <Text style={[this.props.message ? styles.message_modal : {height:0} ]}>{this.props.message}</Text>
-                <TextInput style={styles.input_container}
+                <TextInputMask style={styles.input_container}
                   autoCorrect={(textProps && textProps.autoCorrect==false)?false:true}
                   autoCapitalize={(textProps && textProps.autoCapitalize)?textProps.autoCapitalize:'none'}
                   clearButtonMode={(textProps && textProps.clearButtonMode)?textProps.clearButtonMode:'never'}
@@ -85,6 +86,7 @@ class DialogInput extends PureComponent{
                   placeholderTextColor={placeholderTextColor}
                   onChangeText={this.handleOnChangeText}
                   value={value}
+		  mask="R$ [99990],[99]"
                   />
               </View>
               <View style={styles.btn_container}>
