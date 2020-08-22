@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "react-native-text-input-mask": "https://github.com/react-native-community/react-native-text-input-mask",
-  }
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/joseestrella89/react-native-dialog-input"
