@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import TextInputMask from 'react-native-text-input-mask';
+// import TextInputMask from 'react-native-text-input-mask';
+import { TextInputMask } from 'react-native-masked-text'
 
 class DialogInput extends PureComponent{
   constructor(props){
@@ -26,6 +27,8 @@ class DialogInput extends PureComponent{
   };
 
   handleOnChangeText = (inputModal) => {
+      console.log("inputModal")
+      console.log(inputModal)
     this.setState({ inputModal, openning: false });
   };
 
@@ -71,23 +74,24 @@ class DialogInput extends PureComponent{
               <View style={styles.modal_body} >
                 <Text style={styles.title_modal}>{title}</Text>
                 <Text style={[this.props.message ? styles.message_modal : {height:0} ]}>{this.props.message}</Text>
-                <TextInputMask style={styles.input_container}
-                  autoCorrect={(textProps && textProps.autoCorrect==false)?false:true}
-                  autoCapitalize={(textProps && textProps.autoCapitalize)?textProps.autoCapitalize:'none'}
-                  clearButtonMode={(textProps && textProps.clearButtonMode)?textProps.clearButtonMode:'never'}
-                  clearTextOnFocus={(textProps && textProps.clearTextOnFocus==true)?textProps.clearTextOnFocus:false}
-                  keyboardType={(textProps && textProps.keyboardType)?textProps.keyboardType:'default'}
-                  secureTextEntry={(textProps && textProps.secureTextEntry)?textProps.secureTextEntry:false}
-                  maxLength={(textProps && textProps.maxLength > 0)?textProps.maxLength:null}
-                  autoFocus={true}
-                  onKeyPress={this.handleOnKeyPress}
-                  underlineColorAndroid='transparent'
-                  placeholder={hintInput}
-                  placeholderTextColor={placeholderTextColor}
-                  onChangeText={this.handleOnChangeText}
-                  value={value}
-		  mask="R$ [99990],[99]"
-                  />
+                <TextInputMask
+                  type={'money'}
+                  autoFocus
+                  style={{backgroundColor: '#eee', borderBottomColor: "#333", borderBottomWidth: 1, marginTop: 4, textAlign: 'right', fontSize: 18, color: this.props.InputError ? "red" : "#222"}}
+                  options={{
+                    precision: 2,
+                    separator: ',',
+                    delimiter: '.',
+                    unit: 'R$ ',
+                    suffixUnit: ''
+                  }}
+                  value={this.state.inputModal}
+                  onChangeText={text => {
+                    this.setState({
+                      inputModal: text
+                    })
+                  }}
+                />
               </View>
               <View style={styles.btn_container}>
                 <TouchableOpacity style={styles.touch_modal}
